@@ -1,10 +1,10 @@
-{{ "edd_specific_product_msg.js" | asset_url | script_tag }}
-{{ "edd_collection_msg.js" | asset_url | script_tag }}
-{{ "edd_product_tag_msg.js" | asset_url | script_tag }}
-{{ "edd_product_vendor_msg.js" | asset_url | script_tag }}
-{{ "edd_all_product_msg.js" | asset_url | script_tag }}
-{{ "edd_exclude_product.js" | asset_url | script_tag }}
-{{ "edd_general_settings.js" | asset_url | script_tag }}
+<script type="lazyload_int" data-src="{{ "edd_specific_product_msg.js" | asset_url }}"></script>
+<script type="lazyload_int" data-src="{{ "edd_collection_msg.js" | asset_url }}"></script>
+<script type="lazyload_int" data-src="{{ "edd_product_tag_msg.js" | asset_url }}"></script>
+<script type="lazyload_int" data-src="{{ "edd_product_vendor_msg.js" | asset_url }}"></script>
+<script type="lazyload_int" data-src="{{ "edd_all_product_msg.js" | asset_url }}"></script>
+<script type="lazyload_int" data-src="{{ "edd_exclude_product.js" | asset_url }}"></script>
+<script type="lazyload_int" data-src="{{ "edd_general_settings.js" | asset_url }}"></script>
 
   {% if template contains 'product'  %}
   
@@ -62,7 +62,7 @@
   {% assign edd_is_homepage = '1' %}
 {% endif %}
 
-<script>
+<script type="lazyload_int">
 
   var edd_is_homepage = `{{ edd_is_homepage }}`;
 

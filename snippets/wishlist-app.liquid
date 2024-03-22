@@ -1,0 +1,213 @@
+<div id="shopify-block-16187601983559181590" class="shopify-block shopify-app-block"><script id="sbisa-embed-init" type="lazyload_int">
+  (function () {
+    console.log('Swym SBiSA App Embed Block Init');
+    window.swymWatchlistEmbedBlockLoaded = true;
+
+    function injectSwymShopifyScript() {
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      //src is dynamically generated based on tier
+      s.src = '//swymv3free-01.azureedge.net/code/swym-shopify.js';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    
+    const swymAppMetafields = {
+      pid: 'imljlALUyY0S/cFAuIMzO0pbzYPjCuma9bzEzVbyzbo=',
+      tier: 'v3free-01',
+      js_path: '//swymv3free-01.azureedge.net/code/swym-shopify.js',
+      relay_path: 'https://swymstore-v3free-01.swymrelay.com',
+      isEnabled: '',
+    };
+
+    // Check if Wishlist is installed - bypass script injection as a temporary workaround solution to prevent duplicate scripts
+    // Can be replaced with better logic once Wishlist also uses App Embed Block for script injection
+    fetch('https://swymstore-v3free-01.swymrelay.com' + '/script-tag-check?pid=' + 'imljlALUyY0S/cFAuIMzO0pbzYPjCuma9bzEzVbyzbo=')
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data?.["has-swym-script-tag"]) {
+          injectSwymShopifyScript();
+        }
+      })
+      .catch((error) => {
+        // Handle any errors that occur
+        console.error('Swym Error: ' + error);
+        //Inject script to make sure script is injected nonetheless
+        injectSwymShopifyScript();
+      });
+  })();
+</script>
+
+
+
+
+
+<!-- BEGIN app snippet: swymSnippet --><script type="lazyload_int">
+  (function () {
+    const currentSwymJSPath = '//swymv3free-01.azureedge.net/code/swym-shopify.js';
+    const currentSwymStorePath = 'https://swymstore-v3free-01.swymrelay.com';
+
+
+    const dnsPrefetchLink = `<link rel="dns-prefetch" href="https://${currentSwymStorePath}" crossorigin>`;
+    const dnsPrefetchLink2 = `<link rel="dns-prefetch" href="${currentSwymJSPath}">`;
+    const preConnectLink = `<link rel="preconnect" href="${currentSwymJSPath}">`;
+
+
+    const swymSnippet = document.getElementById('sbisa-embed-init');
+
+    swymSnippet.insertAdjacentHTML('afterend', dnsPrefetchLink);
+    swymSnippet.insertAdjacentHTML('afterend', dnsPrefetchLink2);
+    swymSnippet.insertAdjacentHTML('afterend', preConnectLink);
+  })()    
+</script>
+
+<script type="lazyload_int" id="swym-snippet" type="text">
+  window.swymLandingURL = document.URL;
+  window.swymCart = {"note":"","attributes":{"isApplePay":"false","frtToken":"330303cea9424821b91c765622404854_1710771675919__UDF43_9ck__tt","ftkn":"330303cea9424821b91c765622404854_1710779267055__UDF43_9ck","cartToken":"c1-c19c38d8c318b9f06248ca96e1fc004a"},"original_total_price":0,"total_price":0,"total_discount":0,"total_weight":0.0,"item_count":0,"items":[],"requires_shipping":false,"currency":"INR","items_subtotal_price":0,"cart_level_discount_applications":[],"checkout_charge_amount":0};
+  window.swymPageLoad = function(){
+    window.SwymProductVariants = window.SwymProductVariants || {};
+    window.SwymHasCartItems = 0 > 0;
+    window.SwymPageData = {}, window.SwymProductInfo = {};
+    var unknown = {et: 0};
+    window.SwymPageData = unknown;
+    
+    window.SwymPageData.uri = window.swymLandingURL;
+  };
+
+  if(window.selectCallback){
+    (function(){
+      // Variant select override
+      var originalSelectCallback = window.selectCallback;
+      window.selectCallback = function(variant){
+        originalSelectCallback.apply(this, arguments);
+        try{
+          if(window.triggerSwymVariantEvent){
+            window.triggerSwymVariantEvent(variant.id);
+          }
+        }catch(err){
+          console.warn("Swym selectCallback", err);
+        }
+      };
+    })();
+  }
+  window.swymCustomerId = null;
+  window.swymCustomerExtraCheck = null;
+
+  var swappName = ("Watchlist" || "Watchlist");
+  var swymJSObject = {
+    pid: "imljlALUyY0S\/cFAuIMzO0pbzYPjCuma9bzEzVbyzbo=" || "+pxGce9PbGdFuQYBCViiiol74a7VEIWjEi1rmNHmdAQ=",
+    interface: "/apps/swym" + swappName + "/interfaces/interfaceStore.php?appname=" + swappName
+  };
+  window.swymJSShopifyLoad = function(){
+    if(window.swymPageLoad) swymPageLoad();
+    if(!window._swat) {
+      (function (s, w, r, e, l, a, y) {
+        r['SwymRetailerConfig'] = s;
+        r[s] = r[s] || function (k, v) {
+          r[s][k] = v;
+        };
+      })('_swrc', '', window);
+      _swrc('RetailerId', swymJSObject.pid);
+      _swrc('Callback', function(){initSwymShopify();});
+    }else if(window._swat.postLoader){
+      _swrc = window._swat.postLoader;
+      _swrc('RetailerId', swymJSObject.pid);
+      _swrc('Callback', function(){initSwymShopify();});
+    }else{
+      initSwymShopify();
+    }
+  }
+  if(!window._SwymPreventAutoLoad) {
+    swymJSShopifyLoad();
+  }
+  window.swymGetCartCookies = function(){
+    var RequiredCookies = ["cart", "swym-session-id", "swym-swymRegid", "swym-email"];
+    var reqdCookies = {};
+    RequiredCookies.forEach(function(k){
+      reqdCookies[k] = _swat.storage.getRaw(k);
+    });
+    var cart_token = window.swymCart.token;
+    var data = {
+        action:'cart',
+        token:cart_token,
+        cookies:reqdCookies
+    };
+    return data;
+  }
+
+  window.swymGetCustomerData = function(){
+    
+    return {status:1};
+    
+  }
+</script>
+
+<style id="safari-flasher-pre"></style>
+<script type="lazyload_int">
+  if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+    document.getElementById("safari-flasher-pre").innerHTML = ''
+      + '#swym-plugin,#swym-hosted-plugin{display: none;}'
+      + '.swym-button.swym-add-to-wishlist{display: none;}'
+      + '.swym-button.swym-add-to-watchlist{display: none;}'
+      + '#swym-plugin  #swym-notepad, #swym-hosted-plugin  #swym-notepad{opacity: 0; visibility: hidden;}'
+      + '#swym-plugin  #swym-notepad, #swym-plugin  #swym-overlay, #swym-plugin  #swym-notification,'
+      + '#swym-hosted-plugin  #swym-notepad, #swym-hosted-plugin  #swym-overlay, #swym-hosted-plugin  #swym-notification'
+      + '{-webkit-transition: none; transition: none;}'
+      + '';
+    window.SwymCallbacks = window.SwymCallbacks || [];
+    window.SwymCallbacks.push(function(tracker){
+      tracker.evtLayer.addEventListener(tracker.JSEvents.configLoaded, function(){
+        // flash-preventer
+        var x = function(){
+          SwymUtils.onDOMReady(function() {
+            var d = document.createElement("div");
+            d.innerHTML = "<style id='safari-flasher-post'>"
+              + "#swym-plugin:not(.swym-ready),#swym-hosted-plugin:not(.swym-ready){display: none;}"
+              + ".swym-button.swym-add-to-wishlist:not(.swym-loaded){display: none;}"
+              + ".swym-button.swym-add-to-watchlist:not(.swym-loaded){display: none;}"
+              + "#swym-plugin.swym-ready  #swym-notepad, #swym-plugin.swym-ready  #swym-overlay, #swym-plugin.swym-ready  #swym-notification,"
+              + "#swym-hosted-plugin.swym-ready  #swym-notepad, #swym-hosted-plugin.swym-ready  #swym-overlay, #swym-hosted-plugin.swym-ready  #swym-notification"
+              + "{-webkit-transition: opacity 0.3s, visibility 0.3ms, -webkit-transform 0.3ms !important;-moz-transition: opacity 0.3s, visibility 0.3ms, -moz-transform 0.3ms !important;-ms-transition: opacity 0.3s, visibility 0.3ms, -ms-transform 0.3ms !important;-o-transition: opacity 0.3s, visibility 0.3ms, -o-transform 0.3ms !important;transition: opacity 0.3s, visibility 0.3ms, transform 0.3ms !important;}"
+              + "</style>";
+            document.head.appendChild(d);
+          });
+        };
+        setTimeout(x, 10);
+      });
+    });
+  }
+
+  // Get the money format for the store from shopify
+  window.SwymOverrideMoneyFormat = "Rs. {{amount}}";
+</script>
+<style id="swym-product-view-defaults">
+  /* Hide when not loaded */
+  .swym-button.swym-add-to-wishlist-view-product:not(.swym-loaded) {
+    display: none;
+  }
+</style>
+<!-- END app snippet -->
+
+
+
+<script type="lazyload_int" id="swymSnippetCheckAndActivate">
+  document.addEventListener('DOMContentLoaded', function () {
+    var element = document.querySelector('script#swym-snippet:not([type="text"])');
+
+    if (!element) {
+      //To handle cases where Wishlist is "disabled on live theme"
+      window.swymSnippetNotLoadedFromThemeFiles = true;
+
+      var script = document.querySelector('script#swym-snippet[type="text"]');
+
+      //Activating #swym-snippet
+      script.type = 'text/javascript';
+      new Function(script.textContent)();
+    }
+  });
+</script>
+
+
+
+</div>

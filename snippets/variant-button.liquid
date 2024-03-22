@@ -69,9 +69,9 @@
           {% endfor %}
           <label
             for="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}"
-            class="lazyload variant__button-label color-swatch color-swatch-{{ value | downcase | handle }} color-swatch--{{ value | handle }}{% unless product_available %} disabled{% endunless %}"
+            class="lazyloaded variant__button-label color-swatch color-swatch-{{ value | downcase | handle }} color-swatch--{{ value | handle }}{% unless product_available %} disabled{% endunless %}"
             {% if varimg != blank %}data-bgset="{{ varimg | img_url:''}}"{% endif %} 
-            style="background-color: {{ color_swatch_fallback }}; {% comment %}{% if images[color_file_name] != blank %}  background-image: url({{ color_image }});{% endif %}{% endcomment %}"
+            style="background-color: {{ color_swatch_fallback }}; background-image: url({{ varimg | img_url:'20px'}});"
           >
             {{ value | escape }}
           </label>

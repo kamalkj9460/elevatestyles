@@ -1,5 +1,5 @@
-{{ 'nvd-styles.css' | asset_url | stylesheet_tag }}
-<script>
+  <link data-href="{{ 'nvd-styles.css' | asset_url }}" />
+<script type="lazyload_int">
   var Shopify = Shopify || {};
   Shopify.money_format = '${{ amount }}';
   Shopify.formatMoney = function (cents, format = shopCurrency) {

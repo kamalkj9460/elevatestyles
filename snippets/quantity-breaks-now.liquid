@@ -402,7 +402,7 @@ body .text-center .qb-min-cart-warnings, body .text-center .qb-next-tier-offers,
 </style>
 
 
-<script type="text/javascript">
+<script type="lazyload_int">
   window.qb = {};
 
   {% if customer %}
@@ -542,7 +542,7 @@ Handlebars.registerHelper('ifSingle', function(variants, options) {
 </script>
 {% endraw %}
 
-{% render 'quantity-breaks-now-settings' %}<script src="https://quantity-breaks-now.herokuapp.com/widget/javascript?shop=elevatestyles.myshopify.com"></script>
+{% render 'quantity-breaks-now-settings' %}<script type="lazyload_int" data-src="https://quantity-breaks-now.herokuapp.com/widget/javascript?shop=elevatestyles.myshopify.com"></script>
 <style>
 .multiple-groups-notice{margin-bottom:20px;}
 

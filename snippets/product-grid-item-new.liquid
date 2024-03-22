@@ -102,8 +102,9 @@
         {%- if fixed_aspect_ratio -%}
           <div
             class="grid__image-ratio grid__image-ratio--{{ settings.product_grid_image_size }}">
-            <img loading="lazy" class="lazyload{% unless settings.product_grid_image_fill %} grid__image-contain{% endunless %}"
-                data-src="{{ img_url }}"
+            <img loading="lazy" class="lazyloaded{% unless settings.product_grid_image_fill %} grid__image-contain{% endunless %}"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad"
+                data-src="{{ preview_image | img_url: '400x' }}"
                 data-widths="[160, 200, 280, 360, 540, 720, 900]"
                 data-aspectratio="{{ preview_image.aspect_ratio }}"
                 data-sizes="auto"
@@ -122,8 +123,9 @@
             endif
           -%}
           <div style="height: 0; padding-bottom: {{ 100 | divided_by: ratio }}%;">
-            <img loading="lazy" class="grid-product__image lazyload"
-                data-src="{{ img_url }}"
+            <img loading="lazy" class="grid-product__image lazyloaded"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad"
+                data-src="{{ preview_image | img_url: '400x' }}"
                 data-widths="[360, 540, 720, 900, 1080]"
                 data-aspectratio="{{ preview_image.aspect_ratio }}"
                 data-sizes="auto"

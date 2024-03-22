@@ -1,5 +1,6 @@
 {% if section.settings.show-sezzle-widget or request.design_mode %}
-<script type="text/javascript"> document.sezzleConfig = {
+<script type="lazyload_int"> 
+  document.sezzleConfig = {
 				"configGroups": [{
 					"targetXPath": ".product-detail__price/SPAN-0",
 					"urlMatch": "product"
@@ -8,7 +9,7 @@
 					"urlMatch": "cart"
 				}]
 				} </script>
-<script src="https://widget.sezzle.com/v1/javascript/price-widget?uuid=1deed863-e7df-40ed-9174-b70704517425"></script>
+<script type="lazyload_int" data-src="https://widget.sezzle.com/v1/javascript/price-widget?uuid=1deed863-e7df-40ed-9174-b70704517425"></script>
 {% endif %}
 
 <style>

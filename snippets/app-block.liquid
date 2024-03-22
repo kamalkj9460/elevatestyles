@@ -1,0 +1,86 @@
+<link data-href="https://cdn.shopify.com/extensions/c1d8ab93-4634-4841-9c67-de9be9565305/swym-back-in-stock-alerts-23/assets/app-embed-block.css" rel="stylesheet" type="text/css" media="all">
+<script data-src="https://cdn.shopify.com/extensions/32911627-71f3-4643-b557-b3f8990fe1b3/inbox-225/assets/inbox-chat-loader.js" type="lazyload_int" ></script>
+<script data-src="https://cdn.shopify.com/extensions/a91d92f6-1736-49e0-88a3-74e83b67056c/pre-order-now-wod-11/assets/preorder-now-source.js" type="lazyload_int"></script>
+<link data-href="https://cdn.shopify.com/extensions/a91d92f6-1736-49e0-88a3-74e83b67056c/pre-order-now-wod-11/assets/preorder-now-source.css" rel="stylesheet" type="text/css" media="all">
+<script data-src="https://cdn.shopify.com/extensions/4806bd75-5fc1-43ef-bffa-fe326d8e3057/smile-loyalty-rewards-49/assets/smile-loader.js" type="lazyload_int"></script>
+
+{% if template contains 'product' %}
+  <script data-src="https://cdn.shopify.com/extensions/302adc29-ab56-4a21-ac56-40bc3b9e745e/klarna-on-site-messaging-12/assets/index.js" type="lazyload_int" ></script>
+{% endif %}  
+
+<!-- BEGIN app block: shopify://apps/attentive/blocks/attn-tag/8df62c72-8fe4-407e-a5b3-72132be30a0d -->
+  <script type="lazyload_int" data-src="https://cdn.attn.tv/elevatestylecorporation/dtag.js?source=app-embed" ></script>
+<!-- END app app block -->
+
+<!-- BEGIN app block: shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507 -->
+
+  <script type="lazyload_int" data-src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=Xux5rU"></script>
+  <script type="lazyload_int">!function(){if(!window.klaviyo){window._klOnsite=window._klOnsite||[];try{window.klaviyo=new Proxy({},{get:function(n,i){return"push"===i?function(){var n;(n=window._klOnsite).push.apply(n,arguments)}:function(){for(var n=arguments.length,o=new Array(n),w=0;w<n;w++)o[w]=arguments[w];var t="function"==typeof o[o.length-1]?o.pop():void 0,e=new Promise((function(n){window._klOnsite.push([i].concat(o,[function(i){t&&t(i),n(i)}]))}));return e}}})}catch(n){window.klaviyo=window.klaviyo||[],window.klaviyo.push=function(){var n;(n=window._klOnsite).push.apply(n,arguments)}}}}();</script>
+  <script type="lazyload_int">
+    window.klaviyoReviewsProductDesignMode = false
+  </script>
+
+<!-- END app app block -->
+
+
+<!-- BEGIN app block: shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8 --><!-- Start of Judge.me Core -->
+<link rel="dns-prefetch" href="https://cdn.judge.me/">
+{{ shop.metafields.judgeme.settings | replace: '<script data-cfasync="false" type="text/javascript" async src="', '<script data-cfasync="false" type="lazyload_int" data-src="' | replace: 'type="text/css" media="nope!" onload="this.media=', '' | replace: "'all'", "" | replace: '" href="', 'data-href="' }}
+{% for count in (0..5) %}
+  {% assign metafield_key = 'html_miracle_' | append: count %}
+  {% assign current_metafield = shop.metafields.judgeme[metafield_key] %}
+  {% unless current_metafield %} {% break %} {% endunless %}
+  {{ current_metafield }}
+{% endfor %}
+<script data-cfasync='false' class='jdgm-script' type="lazyload_int">
+!function(e){window.jdgm=window.jdgm||{},jdgm.CDN_HOST="https://cdn.judge.me/",
+jdgm.docReady=function(d){(e.attachEvent?"complete"===e.readyState:"loading"!==e.readyState)?
+setTimeout(d,0):e.addEventListener("DOMContentLoaded",d)},jdgm.loadCSS=function(d,t,o,s){
+!o&&jdgm.loadCSS.requestedUrls.indexOf(d)>=0||(jdgm.loadCSS.requestedUrls.push(d),
+(s=e.createElement("link")).rel="stylesheet",s.class="jdgm-stylesheet",s.media="nope!",
+s.href=d,s.onload=function(){this.media="all",t&&setTimeout(t)},e.body.appendChild(s))},
+jdgm.loadCSS.requestedUrls=[],jdgm.loadJS=function(e,d){var t=new XMLHttpRequest;
+t.onreadystatechange=function(){4===t.readyState&&(Function(t.response)(),d&&d(t.response))},
+t.open("GET",e),t.send()},jdgm.docReady((function(){(window.jdgmLoadCSS||e.querySelectorAll(
+".jdgm-widget, .jdgm-all-reviews-page").length>0)&&(jdgmSettings.widget_load_with_code_splitting?
+parseFloat(jdgmSettings.widget_version)>=3?jdgm.loadCSS(jdgm.CDN_HOST+"widget_v3/base.css"):
+jdgm.loadCSS(jdgm.CDN_HOST+"widget/base.css"):jdgm.loadCSS(jdgm.CDN_HOST+"shopify_v2.css"),
+jdgm.loadJS(jdgm.CDN_HOST+"loader.js"))}))}(document);
+</script>
+
+<noscript><link rel="stylesheet" type="text/css" media="all" href="https://cdn.judge.me/shopify_v2.css"></noscript>
+
+<!-- BEGIN app snippet: theme_fix_tags --><script type="lazyload_int">
+  (function() {
+    var jdgmThemeFixes = null;
+    if (!jdgmThemeFixes) return;
+    var thisThemeFix = jdgmThemeFixes[Shopify.theme.id];
+    if (!thisThemeFix) return;
+
+    if (thisThemeFix.html) {
+      document.addEventListener("DOMContentLoaded", function() {
+        var htmlDiv = document.createElement('div');
+        htmlDiv.classList.add('jdgm-theme-fix-html');
+        htmlDiv.innerHTML = thisThemeFix.html;
+        document.body.append(htmlDiv);
+      });
+    };
+
+    if (thisThemeFix.css) {
+      var styleTag = document.createElement('style');
+      styleTag.classList.add('jdgm-theme-fix-style');
+      styleTag.innerHTML = thisThemeFix.css;
+      document.head.append(styleTag);
+    };
+
+    if (thisThemeFix.js) {
+      var scriptTag = document.createElement('script');
+      scriptTag.classList.add('jdgm-theme-fix-script');
+      scriptTag.innerHTML = thisThemeFix.js;
+      document.head.append(scriptTag);
+    };
+  })();
+</script>
+<!-- END app snippet -->
+<!-- End of Judge.me Core -->
+<!-- END app app block -->

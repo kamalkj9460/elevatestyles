@@ -26,21 +26,10 @@
         <ul
           id=""
           role="list"
-          class="CountryList disclosure__list"
+          class="CountryList disclosure__list customcountrylist"
           hidden
           style="position:absolute;">
-          {% for country in localization.available_countries %}
-            <li class="disclosure__item" tabindex="-1">
-              <a
-                href="#"
-                {% if country.iso_code == localization.country.iso_code %}
-                aria-current="true"
-                {% endif %}
-                data-value="{{ country.iso_code }}">
-                {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
-              </a>
-            </li>
-          {% endfor %}
+
         </ul>
 
         <input

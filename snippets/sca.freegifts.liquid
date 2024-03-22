@@ -282,9 +282,9 @@ have permission of us.
 ========================================
 {% endcomment %}
 
-{{ 'sca.freegift.css' | asset_url | stylesheet_tag }}
-{{ 'option_selection.js' | shopify_asset_url | script_tag }}
-<script data-cfasync="false">
+<link data-href="{{ 'sca.freegift.css' | asset_url }}"/>
+<script type="lazyload_int" data-src="{{ 'option_selection.js' | shopify_asset_url }}"></script>
+<script data-cfasync="false" type="lazyload_int">
     Shopify.money_format = {{ shop.money_format | json }};
     //enable checking free gifts condition when checkout clicked
     if ((typeof SECOMAPP) === 'undefined') { window.SECOMAPP = {}; };

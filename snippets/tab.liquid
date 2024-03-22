@@ -23,7 +23,7 @@
       class="collapsible-content collapsible-content--all{% if force_open %} is-open{% endif %}"
       {% if force_open %}style="height: auto;"{% endif %}>
       <div class="collapsible-content__inner rte">
-        {{ content }}
+        {{ content | replace: 'iframe', 'iframelazy' | replace: 'src="https://www.youtube.com', 'data-class="LazyLoad" data-src="https://www.youtube.com' | replace: '<img alt="" src="https:', '<img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-src="https:'}}
       </div>
     </div>
   </div>

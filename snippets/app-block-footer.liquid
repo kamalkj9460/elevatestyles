@@ -1,0 +1,127 @@
+<div id="shopify-block-15683396631634586217" class="shopify-block shopify-app-block">
+    <script type="lazyload_int" id="chat-button-container" data-horizontal-position="bottom_left" data-vertical-position="lowest" data-icon="chat_bubble" data-text="chat_with_us" data-color="#202a36" data-secondary-color="#ffffff" data-ternary-color="#6a6a6a" data-greeting-message="%F0%9F%91%8B+Hello%21+Please+message+us+if+you+have+questions%2C+or+give+an+idea+of+what+you%E2%80%99re+looking+for.+We%E2%80%99re+happy+to+make+recommendations." data-domain="www.elevatestyles.com" data-external-identifier="JlWi8e_vt4XlqkfL4Hk5wKwDd5wdE_JHOJ9ml9wli_o"></script>
+</div>
+<div id="shopify-block-3577669850698438243" class="shopify-block shopify-app-block">
+    <!-- BEGIN app snippet: preorder-now -->
+    <script type="lazyload_int">      
+        if(typeof window.pn === "undefined"){window.pn = {};}
+        window.pn.cart = {};
+        window.pn.cart = {"note":"","attributes":{"isApplePay":"false","frtToken":"330303cea9424821b91c765622404854_1710771675919__UDF43_9ck__tt","ftkn":"330303cea9424821b91c765622404854_1710779267055__UDF43_9ck","cartToken":"c1-c19c38d8c318b9f06248ca96e1fc004a"},"original_total_price":0,"total_price":0,"total_discount":0,"total_weight":0.0,"item_count":0,"items":[],"requires_shipping":false,"currency":"INR","items_subtotal_price":0,"cart_level_discount_applications":[],"checkout_charge_amount":0}
+        window.pn.cart.items = [];     
+        if (typeof window.pn.cart.items == "object") {
+            for (var i=0; i<window.pn.cart.items.length; i++) {
+                ["sku", "vendor", "url", "image", "handle", "product_type", "product_description"].map(function(a) {
+                    delete window.pn.cart.items[i][a]
+                })
+            }
+        }      
+        function closeNotifyEmailPopup(){
+            var notify_stock_back_modal = document.getElementById("notify-stock-back-modal");
+            if (notify_stock_back_modal.style.display === "none") {
+                notify_stock_back_modal.style.display = "block";
+            } else {
+                notify_stock_back_modal.style.display = "none";
+            }
+        }
+    </script>
+    <!-- END app snippet -->
+    <div id="notify-stock-back-modal" style="display: none;">
+        <div class="ordersfy-modal">
+            <div class="bg-black"></div>
+            <div class="inner-container">
+                <div class="white-box-in">
+                    <div class="error-field notify-success-content" style="display: none;padding: 10px;">
+                        <div class="error success-msg-text pn-notify-popup-success-msg" style="color: green;">Your are successfully subscribed for email notifications.</div>
+                    </div> <span class="cross-me close-notify-email-popup" onClick="closeNotifyEmailPopup()">&#10006;</span>
+                    <div class="notify-for-content">
+                        <p class="pn-notify-popup-heading">Notify me when available </p>
+                        <p class="pn-notify-popup-desc">We will send you a notification as soon as this product is available again.</p>
+                        <div class="email-form">
+                            <div class="field">
+                                <input type="text" class="notify-pn-bk-stock-input-email" placeholder="Email here" /> </div>
+                            <div class="field">
+                                <label><input type="checkbox" class="notify-recurring-box" name="checkbox" style="width: auto;"> Do you want to get recurring notifications?</label>
+                            </div>
+                            <div class="error-field">
+                                <div class="error empty-email-error" style="display: none;">Your email is required</div>
+                            </div>
+                            <button type="submit" class="notify-btn notify-btn-submit pn-notify-btn-text">Notify Me</button>
+                            <p class="pn-notify-popup-footer-text">We don't share your email with anybody</p>
+                        </div>
+                        <div> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="pn-mixed-cart-warning" class="pn-modal">
+        <div id="pn-mixed-cart-warning-content">
+            <span id="pn-modal-close-btn">x</span>
+            <p class="pn-mixed-cart-heading" id="pn-mixed-cart-warning-title"></p>
+            <div id="pn-mixed-cart-warning-text"></div>
+        </div>
+    </div>
+</div>
+<div id="shopify-block-12608439564960700138" class="shopify-block shopify-app-block">
+    <div id="sezzle-widget-embed-block-error"></div>
+    <style>
+        .sezzle-shopify-info-button .sezzle-button-text {}
+    </style>
+    <script type="lazyload_int">
+        // show this error note only inside design preview                
+        const widgetRendererScript = document.createElement("script");
+        widgetRendererScript.type = "text/javascript";
+        widgetRendererScript.src = "https://cdn.shopify.com/extensions/ba27e184-5c67-414e-9665-eabd32d75a15/sezzle-widget-55/assets/widget-renderer.min.js";
+        widgetRendererScript.onload = function() {
+            new WidgetRenderer({
+                merchantUUID: "1deed863-e7df-40ed-9174-b70704517425",
+                blockType: "embed"
+            }).init();
+        };
+        document.head.appendChild(widgetRendererScript);        
+    </script>
+</div>
+<div id="shopify-block-4061177414627956758" class="shopify-block shopify-app-block">  
+    <script type="lazyload_int" data-src="https://zooomyapps.com/wishlist/ZooomyColl.js" data-shop-id="elevatestyles.myshopify.com" data-cus-id="" data-cus-email="" data-cus-name=" " data-page="index" ></script>
+</div>
+<div id="shopify-block-6174324309569838175" class="shopify-block shopify-app-block">
+    <!-- BEGIN app block: shopify://apps/Smile-io/blocks/embed-app/dac9aba2-251e-4c25-abc3-9fc57dbf7885 -->
+    {% assign smile_channel_key = shop.metafields['smile'].channel_key %}
+    {% if customer %}
+        {% assign smile_api_secret = shop.metafields['smile'].api_secret %}
+        {% assign smile_customer_accepts_marketing = customer.accepts_marketing %}
+        {% assign smile_customer_email = customer.email %}
+        {% assign smile_customer_first_name = customer.first_name %}
+        {% assign smile_customer_id = customer.id %}
+        {% assign smile_customer_last_name = customer.last_name %}
+        {% assign smile_customer_orders_count = customer.orders_count %}
+        {% assign smile_customer_tags = customer.tags | join: "," %}
+        {% assign smile_customer_total_spent = customer.total_spent %}
+        {% assign smile_digest = smile_channel_key
+            | append: smile_customer_accepts_marketing
+            | append: smile_customer_email
+            | append: smile_customer_first_name
+            | append: smile_customer_id
+            | append: smile_customer_last_name
+            | append: smile_customer_orders_count
+            | append: smile_customer_tags
+            | append: smile_customer_total_spent
+            | hmac_sha256: smile_api_secret 
+        %}
+    {% endif %}
+    <div class="smile-shopify-init" data-channel-key="{{ smile_channel_key }}"
+      {% if customer %}
+          data-customer-accepts-marketing="{{ smile_customer_accepts_marketing | escape }}"
+          data-customer-email="{{ smile_customer_email | escape }}"
+          data-customer-first-name="{{ smile_customer_first_name | escape }}"
+          data-customer-id="{{ smile_customer_id | escape }}"
+          data-customer-last-name="{{ smile_customer_last_name | escape }}"
+          data-customer-orders-count="{{ smile_customer_orders_count | escape }}"
+          data-customer-tags="{{ smile_customer_tags | escape }}"
+          data-customer-total-spent="{{ smile_customer_total_spent | escape }}"
+          data-digest="{{ smile_digest }}"
+      {% endif %}
+    ></div>
+</div>
+{% render 'qikify-menu' %}
+{% render 'wishlist-app' %}

@@ -6,7 +6,7 @@
   {%- endunless -%}
 {%- endif -%}
 
-<script>
+<script {% unless template contains 'collection' or canonical_url contains '/search'%}type="lazyload_int"{% endunless %}>
   /* Declare bcSfFilterConfig variable */
   var boostPFSAppConfig = {
     api: {
@@ -93,22 +93,36 @@ swatch_settings: {
     boostPFSConfig = mergeObject(boostPFSConfig, boostPFSThemeConfig);
   }
 </script>
-
-<!-- Include Resources -->
-{%- if boost_pfs_is_initfilter == true -%}
-  <script defer src="{{ 'boost-pfs-vendor.js' | asset_url }}"></script>
-  <script defer src="{{ 'boost-pfs-core.js' | asset_url }}"></script>
-<script defer src="{{ 'boost-pfs-otp.js' | asset_url }}"></script>
-  <script defer src="{{ 'boost-pfs-filter.js' | asset_url }}"></script>
-  <script defer src="{{ 'boost-pfs-instant-search.js' | asset_url }}"></script>
-{%- else -%}
-  <script defer src="{{ 'boost-pfs-core-instant-search.js' | asset_url }}"></script>
-  <script defer src="{{ 'boost-pfs-instant-search.js' | asset_url }}"></script>
-{%- endif -%}
-
-<!-- Initialize App -->
-<script defer src="{{ 'boost-pfs-init.js' | asset_url }}"></script>
-
+{% if template contains "collection" or canonical_url contains '/search' %}
+    {%- if boost_pfs_is_initfilter == true -%}
+    <script defer src="{{ 'boost-pfs-vendor.js' | asset_url }}"></script>
+    <script defer src="{{ 'boost-pfs-core.js' | asset_url }}"></script>
+  <script defer src="{{ 'boost-pfs-otp.js' | asset_url }}"></script>
+    <script defer src="{{ 'boost-pfs-filter.js' | asset_url }}"></script>
+    <script defer src="{{ 'boost-pfs-instant-search.js' | asset_url }}"></script>
+  {%- else -%}
+    <script defer src="{{ 'boost-pfs-core-instant-search.js' | asset_url }}"></script>
+    <script defer src="{{ 'boost-pfs-instant-search.js' | asset_url }}"></script>
+  {%- endif -%}
+  
+  <!-- Initialize App -->
+  <script defer src="{{ 'boost-pfs-init.js' | asset_url }}"></script>
+{% else %}  
+  <!-- Include Resources -->
+  {%- if boost_pfs_is_initfilter == true -%}
+    <script type="lazyload_int" data-src="{{ 'boost-pfs-vendor.js' | asset_url }}"></script>
+    <script type="lazyload_int" data-src="{{ 'boost-pfs-core.js' | asset_url }}"></script>
+    <script type="lazyload_int" data-src="{{ 'boost-pfs-otp.js' | asset_url }}"></script>
+    <script type="lazyload_int" data-src="{{ 'boost-pfs-filter.js' | asset_url }}"></script>
+    <script type="lazyload_int" data-src="{{ 'boost-pfs-instant-search.js' | asset_url }}"></script>
+  {%- else -%}
+    <script type="lazyload_int" data-src="{{ 'boost-pfs-core-instant-search.js' | asset_url }}"></script>
+    <script type="lazyload_int" data-src="{{ 'boost-pfs-instant-search.js' | asset_url }}"></script>
+  {%- endif -%}
+  
+  <!-- Initialize App -->
+  <script type="lazyload_int" data-src="{{ 'boost-pfs-init.js' | asset_url }}"></script>
+{% endif %}  
 {% capture boost_pfs_search_no_result_content %}{% render  "boost-pfs-instant-search-no-result-json" %}{% endcapture %}
 {% unless boost_pfs_search_no_result_content contains "Liquid error" %}
   <!-- Instant search no result JSON data -->

@@ -334,13 +334,13 @@
           {{- sale_class -}}"  {{ data_image_width_height }}>
 	<div class="boost-pfs-filter-product-item-inner">
     <div class="boost-pfs-filter-product-item-image" data-boost-image-loading-animation>
-		<a href="{{- product_url -}}" class="boost-pfs-filter-product-item-image-link lazyload boost-pfs-filter-crop-image-position-{{- product_img_crop -}}"
+		<a href="{{- product_url -}}" class="boost-pfs-filter-product-item-image-link lazyloaded boost-pfs-filter-crop-image-position-{{- product_img_crop -}}"
 		style="padding-top: {{- padding_top -}}%;">
-			<img class="boost-pfs-filter-product-item-main-image lazyload Image--lazyLoad"
+			<img class="boost-pfs-filter-product-item-main-image lazyloaded Image--lazyLoad"
 			data-src="{{- preview_image | img_url: image_size -}}"
 			data-srcset="{{- data_src_set -}}"
 			data-widths="[{{ data_widths_range }}]"
-			src="{{- img_default_src -}}"
+			src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-class="LazyLoad" data-
 			data-sizes="auto"
 			alt="{{- product.title | escape -}}"
 			{{ data_img_flip }} />
