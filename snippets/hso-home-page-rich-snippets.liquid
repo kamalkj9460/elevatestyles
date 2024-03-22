@@ -1,0 +1,159 @@
+{% if shop.metafields.hello_rich_snippets.home_page_schema_status == "enabled" and request.page_type == "index" %}
+    <script id="hello_rich_snippets_home_page" type="application/ld+json">
+    {
+        "@context" : "http://schema.org",
+        "@type" : "Corporation"
+        {%- if shop.metafields.hello_rich_snippets.json_ld.value.shopBrand != blank -%}
+        	{% capture newLine %}
+		  	{% endcapture %}
+       	,"brand": "{{shop.metafields.hello_rich_snippets.json_ld.value.shopBrand}}"
+        {%- endif -%}
+        
+        {%- if shop.metafields.hello_rich_snippets.json_ld.value.shopDescription != blank -%}
+        	{% capture newLine %}
+		  	{% endcapture %}
+        ,"description": "{{shop.metafields.hello_rich_snippets.json_ld.value.shopDescription}}"
+        {%- endif -%}
+        
+        {%- if shop.name != blank -%}
+        	{% capture newLine %}
+		  	{% endcapture %}
+        ,"name" : "{{shop.name}}"
+        {%- endif -%}
+        
+        {%- assign shopFoundersString = shop.metafields.hello_rich_snippets.json_ld.value.shopFounders | join: '' -%}
+        {%- if shopFoundersString != blank -%}
+        	{% capture newLine %}
+		  	{% endcapture %}
+        ,"founders": {{ shop.metafields.hello_rich_snippets.json_ld.value.shopFounders | json }}
+        {%- endif -%}
+        
+        
+        {%- if shop.metafields.hello_rich_snippets.json_ld.value.shopFoundingDate != blank -%}
+        	{% capture newLine %}
+		  	{% endcapture %}
+        ,"foundingDate": "{{shop.metafields.hello_rich_snippets.json_ld.value.shopFoundingDate}}"
+        {%- endif -%}
+        
+        
+        {%- if shop.metafields.hello_rich_snippets.json_ld.value.shopFoundingLocation != blank -%}
+        	{% capture newLine %}
+		  	{% endcapture %}
+        ,"foundingLocation": "{{shop.metafields.hello_rich_snippets.json_ld.value.shopFoundingLocation}}"
+        {%- endif -%}
+        
+        
+        
+        {%- if shop.metafields.hello_rich_snippets.json_ld.value.shopKnowsAbout != blank -%}
+        	{% capture newLine %}
+		  	{% endcapture %}
+        ,"knowsAbout": "{{shop.metafields.hello_rich_snippets.json_ld.value.shopKnowsAbout}}"
+        {%- endif -%}
+        
+        
+        
+        
+        {%- if shop.metafields.hello_rich_snippets.json_ld.value.shopLegalName != blank -%}
+        	{% capture newLine %}
+		  	{% endcapture %}
+        ,"legalName": "{{shop.metafields.hello_rich_snippets.json_ld.value.shopLegalName}}"
+        {%- endif -%}
+        
+        
+        
+        {%- if shop.metafields.hello_rich_snippets.json_ld.value.leiCode != blank -%}
+        	{% capture newLine %}
+		  	{% endcapture %}
+        ,"leiCode": "{{shop.metafields.hello_rich_snippets.json_ld.value.leiCode}}"
+        {%- endif -%}
+        
+        
+        {%- if shop.metafields.hello_rich_snippets.json_ld.value.logoUrl != blank -%}
+        	{% capture newLine %}
+		  	{% endcapture %}
+        ,"logo" : "{{shop.metafields.hello_rich_snippets.json_ld.value.logoUrl}}"
+        {%- endif -%}
+        
+        
+        
+        {%- if shop.metafields.hello_rich_snippets.json_ld.value.numberOfEmployees != blank -%}
+        	{% capture newLine %}
+		  	{% endcapture %}
+        ,"numberOfEmployees": "{{shop.metafields.hello_rich_snippets.json_ld.value.numberOfEmployees}}"
+        {%- endif -%}
+        
+        
+       
+        
+        {%- if shop.metafields.hello_rich_snippets.json_ld.value.ownershipFundingInfoUrl != blank -%}
+        	{% capture newLine %}
+		  	{% endcapture %}
+        ,"ownershipFundingInfo": "{{shop.metafields.hello_rich_snippets.json_ld.value.ownershipFundingInfoUrl}}"
+        {%- endif -%}
+        
+        
+        {%- if shop.domain != blank -%}
+        	{% capture newLine %}
+		  	{% endcapture %}
+        ,"url" : "https://{{shop.domain}}"
+        {%- endif -%}
+  
+
+        {%- assign socialProfilesString = shop.metafields.hello_rich_snippets.json_ld.value.socialProfiles | join: '' -%}
+        {%- if socialProfilesString != blank -%}
+          {% capture newLine %}
+		  {% endcapture %}
+          {% assign socialProfilesArray = '' | split: '' %}
+          {%- for singleLink in shop.metafields.hello_rich_snippets.json_ld.value.socialProfiles -%}
+              {%- if singleLink != blank -%}
+              
+              {% assign addCommaSingleLink = singleLink | append : ',' | split: ',' %}
+              
+                  {% assign socialProfilesArray = socialProfilesArray | concat: addCommaSingleLink %}
+              {%- endif -%}
+            {%- endfor -%}
+          
+      	,"sameAs" : {{ socialProfilesArray | json }}
+        {%- endif -%}
+        
+        
+        {%- if shop.metafields.hello_rich_snippets.json_ld.value.shopSlogan != blank -%}
+        	{% capture newLine %}
+		  	{% endcapture %}
+        ,"slogan": "{{shop.metafields.hello_rich_snippets.json_ld.value.shopSlogan}}"
+        {%- endif -%}
+        
+        
+        {%- assign tickerSymbolString = shop.metafields.hello_rich_snippets.json_ld.value.tickerSymbol | join: '' -%}
+        {%- if tickerSymbolString != blank -%}
+        	{% capture newLine %}
+		  	{% endcapture %}
+        ,"tickerSymbol": {{ shop.metafields.hello_rich_snippets.json_ld.value.tickerSymbol | json }}
+        {%- endif -%}
+        
+        
+        {%- if shop.metafields.hello_rich_snippets.json_ld.value.awards != blank -%}
+        	{% capture newLine %}
+		  	{% endcapture %}
+        ,"awards": "{{shop.metafields.hello_rich_snippets.json_ld.value.awards}}"
+        {%- endif -%}
+        
+        {% capture newLine %}
+		{% endcapture %}   
+        
+    }
+    </script>
+    <script type="application/ld+json" id="hello_rich_snippets_search_schema">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "{{ shop.url }}",
+        "name": {{ shop.name | json }},
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{{ shop.url }}/search?q={query}",
+            "query-input": "required name=query"
+        }
+    }
+    </script>
+{% endif %}

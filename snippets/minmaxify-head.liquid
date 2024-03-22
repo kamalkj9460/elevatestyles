@@ -1,0 +1,7 @@
+{% if content_for_header contains 'shopifyorderlimits.s3.amazonaws.com' %}
+{% if shop.permanent_domain == 'elevatestyles.myshopify.com' %}
+<script src="https://shopifyorderlimits.s3.amazonaws.com/limits/elevatestyles.myshopify.com?v=93b&r=20221201191802&shop=elevatestyles.myshopify.com"></script>
+{% endif %}
+{% else %}
+<script type="text/javascript">console.error("MinMaxify is deactivated for this website. Please don't forget to remove minmaxify-head.liquid still being referenced by theme.liquid")</script>
+{% endif %}

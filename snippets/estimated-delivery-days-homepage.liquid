@@ -1,0 +1,74 @@
+<!-- sb code for appear delivery message on home page--->
+{%- assign templateBase = template -%}
+{%- if templateBase == 'index' -%}
+
+{% assign tagCount = 0 %}
+{% assign collectionCount = 0 %}
+
+<!-- get product qty -->
+{% assign product_qty = 0 %}
+{% for variant in product.variants %}
+{% if variant.inventory_quantity > 0 %}
+{% assign product_qty = product_qty | plus: variant.inventory_quantity %}
+{% endif %}
+{% endfor %}
+
+<!-- get collection --> 
+{% assign collection_id = 'not_set' %}
+{% assign pro_collection = product.collections.first %}
+{% if pro_collection %}
+{% assign collection_id = product.collections.first.id  %}
+{% endif %}
+
+<div class='sb_info metafield_update_home_page edd_home_page_data' style='display:none'>
+<div class='sb_store_date'>{{ "now" | date: "%b %d, %Y %H:%M" }}</div>
+
+<div >Product Qty : <span class='product_qty'>{{product_qty}}</span></div>
+<div >Product Weight : <span class='product_weight'>{{product.weight}}</span></div>
+<div >Product available : <span class='product_available'>{{product.available}}</span></div>
+<div >Product Id : <span class='product_id'>{{product.id}}</span></div>
+<div >Product Handle : <span class='product_handle'>{{product.handle}}</span></div>
+<div >Product Vendor : <span class='product_vendor'>{{product.vendor}}</span></div>
+<div >Product Type : <span class='product_type'>{{product.type}}</span></div>
+<div >Product Tag : {% for getproduct_tag in product.tags %} 
+<div> {{tagCount}} : 
+<span class='product_tag edd_product_tag product_tag_{{tagCount}}'>{{getproduct_tag}}</span>  
+{% assign tagCount = tagCount | plus: 1 %}  
+</div>
+{% endfor %}
+</div>
+<div >Product Collection : {% for getCollection in  product.collections %}
+    <div> {{collectionCount}} : 
+    <span class='edd_product_collection product_collection_{{collectionCount}}'>{{getCollection.id}}</span> 
+    {% assign collectionCount = collectionCount | plus: 1 %}  
+    </div>
+{% endfor %}
+</div>
+</div>
+{% endif %}
+
+<script>
+
+var edd_product_id = document.querySelector('.edd_home_page_data .product_id').innerText;
+var edd_product_type = document.querySelector('.edd_home_page_data .product_type').innerText;
+var edd_product_vendor = document.querySelector('.edd_home_page_data .product_vendor').innerText;
+
+var edd_product_qty = document.querySelector('.edd_home_page_data .product_qty').innerText;
+var edd_product_weight = document.querySelector('.edd_home_page_data .product_weight').innerText;
+var product_avaiable = document.querySelector('.edd_home_page_data .product_available').innerText;
+
+var edd_product_tag = new Array();
+var edd_collection_id = new Array();
+
+for (i = 0; i < document.getElementsByClassName("edd_product_tag").length; i++) {
+edd_product_tag.push(document.querySelector(".product_tag_"+i).innerText);
+}
+
+
+for (i = 0; i < document.getElementsByClassName("edd_product_collection").length; i++) {
+  edd_collection_id.push(document.querySelector(".product_collection_"+i).innerText);
+}
+      
+</script>
+
+<!-- sb code --->

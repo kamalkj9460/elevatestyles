@@ -1,0 +1,22 @@
+{% if shop.metafields.hello_rich_snippets.collection_page_schema_status == "enabled" and request.page_type == "collection" %}
+<script type="application/ld+json" id="hello_rich_snippets_collection_page">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": {{ shop.url | json }}
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": {{ collection.title | json}},
+        "item": {{ shop.url | append: collection.url | json }}
+      }
+    ]
+  }
+</script> 
+{% endif %}

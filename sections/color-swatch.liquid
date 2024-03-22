@@ -1,0 +1,178 @@
+{% for block in section.blocks %}
+{%- assign color-name1 = block.settings.colorname1 | downcase | handle -%}
+{%- assign color-image1 = block.settings.color_pic1 -%}
+{%- assign color-name2 = block.settings.colorname2 | downcase | handle -%}
+{%- assign color-image2 = block.settings.color_pic2 -%}
+{%- assign color-name3 = block.settings.colorname3 | downcase | handle -%}
+{%- assign color-image3 = block.settings.color_pic3 -%}
+{%- assign color-name4 = block.settings.colorname4 | downcase | handle -%}
+{%- assign color-image4 = block.settings.color_pic4 -%}
+{%- assign color-name5 = block.settings.colorname5 | downcase | handle -%}
+{%- assign color-image5 = block.settings.color_pic5 -%}
+{%- assign color-name6 = block.settings.colorname6 | downcase | handle -%}
+{%- assign color-image6 = block.settings.color_pic6 -%}
+{%- assign color-name7 = block.settings.colorname7 | downcase | handle -%}
+{%- assign color-image7 = block.settings.color_pic7 -%}
+{%- assign color-name8 = block.settings.colorname8 | downcase | handle -%}
+{%- assign color-image8 = block.settings.color_pic8 -%}
+{%- assign color-name9 = block.settings.colorname9 | downcase | handle -%}
+{%- assign color-image9 = block.settings.color_pic9 -%}
+{%- assign color-name10 = block.settings.colorname10 | downcase | handle -%}
+{%- assign color-image10 = block.settings.color_pic10 -%}
+
+
+{% style %}
+.color-swatch--{{color-name1}} {
+	background-image: url({{color-image1 | img_url:''}});
+}
+.color-swatch--{{color-name2}} {
+	background-image: url({{color-image2 | img_url:''}});
+}
+.color-swatch--{{color-name3}} {
+	background-image: url({{color-image3 | img_url:''}});
+}
+.color-swatch--{{color-name4}} {
+	background-image: url({{color-image4 | img_url:''}});
+}
+.color-swatch--{{color-name5}} {
+	background-image: url({{color-image5 | img_url:''}});
+}
+.color-swatch--{{color-name6}} {
+	background-image: url({{color-image6 | img_url:''}});
+}
+.color-swatch--{{color-name7}} {
+	background-image: url({{color-image7 | img_url:''}});
+}
+.color-swatch--{{color-name8}} {
+	background-image: url({{color-image8 | img_url:''}});
+}
+.color-swatch--{{color-name9}} {
+	background-image: url({{color-image9 | img_url:''}});
+}
+.color-swatch--{{color-name10}} {
+	background-image: url({{color-image10 | img_url:''}});
+}
+{% endstyle %}
+{% endfor %}
+
+{% schema %}
+  {
+    "name": "Color Swatch",
+	"class":"color_swatch_Hideen_section",
+    "settings": [],
+	"blocks":[
+	   {
+		"type":"color_img",
+		"name":"Color Varinat",
+		"settings":[
+                    {
+            "type":"text",
+            "id":"colorname1",
+            "label":"Color Name 1"
+          },
+          {
+            "type":"image_picker",
+            "id":"color_pic1",
+            "label":"Color Image 1"
+          },
+          {
+            "type":"text",
+            "id":"colorname2",
+            "label":"Color Name 2"
+          },
+          {
+            "type":"image_picker",
+            "id":"color_pic2",
+            "label":"Color Image 2"
+          },
+          {
+            "type":"text",
+            "id":"colorname3",
+            "label":"Color Name 3"
+          },
+          {
+            "type":"image_picker",
+            "id":"color_pic3",
+            "label":"Color Image 3"
+          },
+          {
+            "type":"text",
+            "id":"colorname4",
+            "label":"Color Name 4"
+          },
+          {
+            "type":"image_picker",
+            "id":"color_pic4",
+            "label":"Color Image 4"
+          },
+          {
+            "type":"text",
+            "id":"colorname5",
+            "label":"Color Name 5"
+          },
+          {
+            "type":"image_picker",
+            "id":"color_pic5",
+            "label":"Color Image 5"
+          },
+                    {
+            "type":"text",
+            "id":"colorname6",
+            "label":"Color Name 6"
+          },
+          {
+            "type":"image_picker",
+            "id":"color_pic6",
+            "label":"Color Image 6"
+          },
+          {
+            "type":"text",
+            "id":"colorname7",
+            "label":"Color Name 7"
+          },
+          {
+            "type":"image_picker",
+            "id":"color_pic7",
+            "label":"Color Image 7"
+          },
+          {
+            "type":"text",
+            "id":"colorname8",
+            "label":"Color Name 8"
+          },
+          {
+            "type":"image_picker",
+            "id":"color_pic8",
+            "label":"Color Image 8"
+          },
+          {
+            "type":"text",
+            "id":"colorname9",
+            "label":"Color Name 9"
+          },
+          {
+            "type":"image_picker",
+            "id":"color_pic9",
+            "label":"Color Image 9"
+          },
+          {
+            "type":"text",
+            "id":"colorname10",
+            "label":"Color Name 10"
+          },
+          {
+            "type":"image_picker",
+            "id":"color_pic10",
+            "label":"Color Image 10"
+          }
+	   ]
+	  }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

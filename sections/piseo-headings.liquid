@@ -1,0 +1,51 @@
+<div>
+  <div>
+    {% if section.settings.heading != blank %}
+      <h1 style="text-align:center;margin-left:24px;margin-right:24px;">{{ section.settings.heading }}</h1>
+    {% endif %}
+    {% if section.settings.subheading != blank %}
+      <h2 style="text-align:center;margin-left:24px;margin-right:24px;">{{ section.settings.subheading }}</h2>
+    {% endif %}
+  </div>
+</div>
+
+    {% schema %}
+    {
+    "name": {
+      "en": "SEO Headings"
+    },
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": {
+          "en": "Heading"
+        },
+        "default": {
+          "en": "Add your primary heading here"
+        }
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": {
+          "en": "Subheading"
+        },
+        "default": {
+          "en": "Add your subheading here"
+        }
+      }
+    ],
+    "presets": [
+      {
+        "name": {
+          "en": "SEO Headings"
+        },
+        "category": {
+          "en": "SEO"
+        }
+      }
+    ]
+    }
+    {% endschema %}

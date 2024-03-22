@@ -1,0 +1,35 @@
+
+{% if shop.metafields.hello_rich_snippets.article_page_schema_status == "enabled" and request.page_type == "article" %}
+  <script type="application/ld+json" id="hello_rich_snippets_article_page">
+  {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      "articleBody": {{ article.content | strip_html | json }},
+      "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": {{ shop.url | append: page.url | json }}
+      },
+      "headline": {{ article.title | json }},
+      {% if article.excerpt != blank %}
+          "description": {{ article.excerpt | strip_html | json }},
+      {% endif %}
+      {% if article.image %}
+          {% assign image_size = article.image.width | append: 'x' %}
+          "image": [
+              {{ article | img_url: image_size | prepend: "https:" | json }}
+          ],
+      {% endif %}
+      "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+      "dateCreated": {{ article.created_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+      "author": {
+          "@type": "Person",
+          "name": {{ article.author | json }},
+		      "url": {{ article.url | json }}
+      },
+      "publisher": {
+          "@type": "Organization",
+          "name": {{ shop.name | json }}
+      }
+  }
+  </script>
+{% endif %}

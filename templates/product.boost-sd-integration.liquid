@@ -1,0 +1,79 @@
+{%- liquid
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+  endif
+
+  assign product_tags = product.tags | join: ','
+  assign has_custom_label = false
+  assign custom_labels = ''
+  if product.metafields.theme.label and product.metafields.theme.label != blank
+    assign has_custom_label = true
+    assign custom_labels = product.metafields.theme.label.value
+  elsif product_tags contains '_label_'
+    for tag in product.tags
+      if tag contains '_label_'
+        assign tag_starts_with = tag | slice: 0
+        if tag_starts_with == '_'
+          assign has_custom_label = true
+          assign custom_label = tag | replace: '_label_', ''
+          assign custom_labels = custom_labels | append: custom_label | append: ','
+        endif
+      endif
+    endfor
+  endif
+-%}
+
+{% capture product_price %}
+{%- if product.price_varies -%}
+  <span class="grid-product__price--current">
+    {%- render 'price-varies', price: product.price_min -%}
+  </span>
+{%- else -%}
+  {%- if on_sale -%}
+    <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+  {%- endif -%}
+  <span class="grid-product__price--current">
+    {%- render 'price' with product.price -%}
+  </span>
+{%- endif -%}
+{%- if on_sale -%}
+  <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+  <span class="grid-product__price--original">
+    {%- render 'price' with product.compare_at_price -%}
+  </span>
+
+  {%- if settings.product_save_amount -%}
+    {%- if settings.product_save_type == 'dollar' -%}
+      {%- capture saved_amount -%}{{ product.compare_at_price | minus: product.price | money_without_trailing_zeros }}{%- endcapture -%}
+    {%- else -%}
+      {%- capture saved_amount -%}{{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%{%- endcapture -%}
+    {%- endif -%}
+    <span class="grid-product__price--savings">
+      {{ 'products.general.save_html' | t: saved_amount: saved_amount }}
+    </span>
+  {%- endif -%}
+{%- endif -%}
+
+{%- assign product_variant = product.selected_or_first_available_variant -%}
+{%- if product_variant.unit_price_measurement -%}
+  <div class="product__unit-price">
+    {%- capture unit_price_base_unit -%}
+      {%- if product_variant.unit_price_measurement -%}
+        {%- if product_variant.unit_price_measurement.reference_value != 1 -%}
+          {{ product_variant.unit_price_measurement.reference_value }}
+        {%- endif -%}
+        {{ product_variant.unit_price_measurement.reference_unit }}
+      {%- endif -%}
+    {%- endcapture -%}
+
+    {{ product_variant.unit_price | money }}/{{ unit_price_base_unit }}
+  </div>
+{%- endif -%}
+{% endcapture %}
+
+{% layout none %}
+{
+  "id": {{ product.id | json }},          
+  "price": {{ product_price | json }}
+}

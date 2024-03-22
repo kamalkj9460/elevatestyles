@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+ <!-- Global site tag (gtag.js) - Google Ads: 988122190 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-988122190"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-988122190', {'allow_enhanced_conversions': true});
+</script>
+
+<script>
+gtag('set', 'user_data', {
+    "email": "{{ checkout.email }}",
+    "phone_number": "{{ checkout.billing_address.phone }}",
+    "address": {
+    "first_name": "{{ checkout.billing_address.first_name }}",
+    "last_name": "{{ checkout.billing_address.last_name }}",
+    "street": "{{ checkout.billing_address.street }}",
+    "city": "{{ checkout.billing_address.city }}",
+    "region": "{{ checkout.billing_address.province }}",
+    "postal_code": "{{ checkout.billing_address.zip }}",
+    "country": "{{ checkout.billing_address.country_code }}"
+  }
+});
+</script>
+
+
+<script>
+  gtag('event', 'conversion', {
+    'send_to': 'AW-988122190/qvGDCL6SmZIZEM6YltcD',
+    'value': {{ checkout.total_price | divided_by: 100.0 }},
+       'currency': '{{ currency }}',
+       'transaction_id': '{{ order_number }}',
+       });
+</script>
+
+  <head>
+    <script>(function () { function asyncLoad() { var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://s3.eu-west-1.amazonaws.com/production-klarna-il-shopify-osm/44241829bcc56116e10834fcdc3b3f3426feef24/elevatestyles.myshopify.com-1674743645354.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); }; if (window.attachEvent) { window.attachEvent('onload', asyncLoad); } else { window.addEventListener('load', asyncLoad, false); } })(); </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+    <meta name="referrer" content="origin">
+
+    <title>{{ page_title }}</title>
+
+    {{ content_for_header }}
+
+    {{ checkout_stylesheets }}
+    {{ checkout_scripts }}
+    
+    <!--- Seel Code --->
+	<script src="https://cdn.seel.com/releases/scripts/shopify-ra/add-ons/ra-checkout-embedded.min.js"></script>
+	<!--- Seel End --->
+    
+    <!--Route Code Edited 03/14/2022-->
+    <script type="text/javascript" src="https://cdn.routeapp.io/route-widget-shopify/v2/route-widget-shopify-stable-v2.min.js"></script>
+    <style>
+      .route-widget {
+        justify-content: flex-end !important;
+      }
+    </style>
+    <!--End Route Code-->
+    
+  
+<!-- GS-Inventory Start. Do not change -->
+{% if template != "index" %}{% if product %}  
+  <script class="gsinvProdScript">
+    gsInventoryDefaultV = "{{ product.selected_or_first_available_variant.id }}";
+    cntImages = 0;
+    gsInventoryQty = {};
+    gsIncoming = {};    
+    gsIncomingDate = {};
+    gsInventoryContinue = {};
+    gssiproductUrl = "{{ product.handle }}";
+    {% for variant in product.variants %} gsInventoryQty[{{variant.id}}] = {% if variant.inventory_management %} {{variant.inventory_quantity}} {% else %} 'na' {% endif %} ; gsIncomingDate[{{variant.id}}] = '{{variant.next_incoming_date}}'; gsInventoryContinue[{{variant.id}}] = '{{variant.inventory_policy}}'; gsIncoming[{{variant.id}}] = {% if variant.incoming %} true {% else %} false {% endif %} ; cntImages++; {% endfor %}    
+  </script>
+{% endif %}
+
+{% if template != "index" %}<script async type="text/javascript" src="https://gravity-apps.com/showinventory/js/shopify/gsinventory8233.js?v=88180e74ae4ecc30a489b48cd9a41b77"></script>{% endif %}{% endif %}
+<!-- GS-Inventory End. Do not change  -->
+  {% include "globale-checkout-css" %}
+</head>
+  <body>
+    {{ skip_to_content_link }}
+
+    <header class="banner" data-header role="banner">
+      <div class="wrap">
+        {{ content_for_logo }}
+      </div>
+    </header>
+
+    {{ order_summary_toggle }}
+    <div class="content" data-content>
+      <div class="wrap">
+        <div class="main">
+          <header class="main__header" role="banner">
+            {{ content_for_logo }}
+            {{ breadcrumb }}
+            {{ alternative_payment_methods }}
+          </header>
+          <main class="main__content" role="main">
+            {{ content_for_layout }}
+          </main>
+          <footer class="main__footer" role="contentinfo">
+            {{ content_for_footer }}
+          </footer>
+        </div>
+        <aside class="sidebar" role="complementary">
+          <div class="sidebar__header">
+            {{ content_for_logo }}
+          </div>
+          <div class="sidebar__content">
+            {{ content_for_order_summary }}
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    {{ tracking_code }}
+  
+  {% include "globale-checkout-js" %}
+</body>
+</html>

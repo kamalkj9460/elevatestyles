@@ -1,0 +1,44 @@
+
+{% if shop.metafields.hello_rich_snippets.blog_page_schema_status == "enabled" and request.page_type == "blog" %}
+<script type="application/ld+json" id="hello_rich_snippets_blog_page">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "url": "{{ shop.url | append: blog.url }}"
+    {%- if blog.articles != blank %},
+        "blogPosts": [
+        {%- for article in blog.articles %}
+            {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                "headline": {{ article.title | strip_html | strip_newlines | strip | escape | json}},
+                "mainEntityOfPage": "{{ shop.url | append: article.url }}",
+                "image": {
+                    "@type": "ImageObject",
+                    "url": "{{ article.image.src | img_url: "1024x1024" | prepend: "https:" }}",
+                    "width": 1024,
+                    "height": 1024
+                },
+                "url": "{{ shop.url | append: article.url }}",
+                "datePublished": "{{ article.published_at }}",
+                "dateModified": "{{ article.published_at }}",
+                "dateCreated": "{{ article.created_at }}",
+            {%- if article.excerpt != blank %}
+                "description": {{ article.excerpt | strip_html | truncatewords: 25 | json }},
+            {%- endif %}
+                "author": {
+                    "@type": "Person",
+                    "name": "{{ article.author }}",
+                    "url": {{ article.url | json }}
+                },
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "{{ shop.name }}"
+                }
+            }{% unless forloop.last %},{% endunless %}
+        {%- endfor %}
+        ]
+    {%- endif %}
+    }
+</script>
+{% endif %}

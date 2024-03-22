@@ -1,0 +1,161 @@
+{% if shop.metafields.hello_rich_snippets.product_page_schema_status == "enabled" and request.page_type == "product" %}
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+	<script id="hello_rich_snippets_product_page" type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "Product",
+        "category": "{{product.type}}",
+        "url": {{ shop.url | append: product.url | json }},
+        "description": {{ product.description | strip_html | json }},
+        "name": {{ product.title | json }},
+        {%- if product.featured_media -%}
+          {%- assign media_size = product.featured_media.preview_image.width | append: 'x' -%}
+          "image": [
+            {{ product.featured_media | img_url: media_size | prepend: "https:" | json }}
+          ],
+  	    {%- endif -%}
+        "brand": { "@type": "Brand", "name": {{ product.vendor | json }} },
+        {%- if current_variant.sku != blank -%}
+        "sku": {{ current_variant.sku | json }},
+        "mpn": "{{ product.selected_or_first_available_variant.barcode | default: product.selected_or_first_available_variant.sku }}",
+        {%- endif -%}
+      
+      {%- assign __variantPrices = product.variants | map: 'price' -%}
+      {%- assign __high_price = __variantPrices.first | divided_by: 100.00 -%}
+      {%- assign __low_price = __variantPrices.first | divided_by: 100.00 -%}
+      
+      {%- for variant_price in __variantPrices -%}
+        {%- assign __temp_price = variant_price | divided_by: 100.00 -%}
+      
+        {%- if __temp_price > __high_price -%}
+          {%- assign __high_price = __temp_price -%}
+        {%- endif -%}	
+        {%- if __temp_price < __low_price  -%}
+          {%- assign __low_price = __temp_price -%}
+        {%- endif -%}
+        
+      {%- endfor -%}
+        "offers": {
+          "@type":"AggregateOffer",
+          "availability": "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+          "lowPrice": {{ __low_price | json }},
+          "highPrice": {{ __high_price | json }},
+          "offerCount": {{__variantPrices | size | json}},
+          "priceCurrency": {{ cart.currency.iso_code | json }}
+       }
+        
+        {%- assign r_review_value = "" %}
+        {%- assign r_review_count = "" %}
+        {%- assign r_review_provider = "" %}
+
+        {%- if product.metafields.yotpo.reviews_count and product.metafields.yotpo.reviews_count != "0" -%}
+        {%- assign r_review_value = product.metafields.yotpo.reviews_average %}
+        {%- assign r_review_count = product.metafields.yotpo.reviews_count %}
+        {%- assign r_review_provider = "yotpo" -%}
+        {%- endif -%}
+
+        {%- if product.metafields.orankl.reviews_count and product.metafields.orankl.reviews_count != "0" -%}
+        {%- assign r_review_value = product.metafields.orankl.rating %}
+        {%- assign r_review_count = product.metafields.orankl.reviews_count %}
+        {%- assign r_review_provider = "orankl" -%}
+        {%- endif -%}
+
+        {%- if product.metafields.loox.num_reviews and product.metafields.loox.num_reviews != "0" -%}
+        {%- assign r_review_value = product.metafields.loox.avg_rating %}
+        {%- assign r_review_count = product.metafields.loox.num_reviews %}
+        {%- assign r_review_provider = "loox" -%}
+        {%- endif -%}
+
+        {%- if product.metafields.ssw.count_rate and product.metafields.ssw.count_rate != "0" -%}
+        {%- assign r_review_value = product.metafields.ssw.avg_rate %}
+        {%- assign r_review_count = product.metafields.ssw.count_rate %}
+        {%- assign r_review_provider = "ssw" -%}
+        {%- endif -%}
+
+        {%- if product.metafields.vnreviews.reviewCount and product.metafields.vnreviews.reviewCount != "0" -%}
+        {%- assign r_review_value = product.metafields.vnreviews.ratingValue %}
+        {%- assign r_review_count = product.metafields.vnreviews.reviewCount %}
+        {%- assign r_review_provider = "vnreviews" -%}
+        {%- endif -%}
+
+        {%- if product.metafields.stamped.reviews_count and product.metafields.stamped.reviews_count != "0" -%}
+        {%- assign r_review_value = product.metafields.stamped.reviews_average %}
+        {%- assign r_review_count = product.metafields.stamped.reviews_count %}
+        {%- assign r_review_provider = "stamped" -%}
+        {%- endif -%}
+
+        {%- if product.metafields.spr.reviews and product.metafields.spr.reviews != blank -%}
+            {% assign r_review_count = product.metafields.spr.reviews | split: 'reviewCount" content="' | last | split: '"' |first | plus: 0 %}
+            {% assign r_review_value = product.metafields.spr.reviews | split: 'ratingValue" content="' | last | split: '"' |first | plus: 0 %}
+            {% if r_review_count == 0 and r_review_value == 0 %}
+              {% assign r_review_count = product.metafields.spr.reviews | split: 'votes" content="' | last | split: '"' |first | plus: 0 %}
+              {% assign r_review_value = product.metafields.spr.reviews | split: 'average" content="' | last | split: '"' |first | plus: 0  %}
+            {% endif %}
+            {% if r_review_count == 0 and r_review_value == 0 %}
+              {% assign r_review_count = product.metafields.spr.reviews | split: 'reviewCount": "' | last | split: '"' |first | plus: 0 %}
+              {% assign r_review_value = product.metafields.spr.reviews | split: 'ratingValue": "' | last | split: '"' |first | plus: 0  %}
+            {% endif %}
+        {%- assign r_review_provider = "Shopify Product Reviews" -%}
+        {%- endif -%}
+
+        {%- if product.metafields.judgeme.widget -%}
+        {%- assign r_review_value = product.metafields.judgeme.widget | split: "data-average-rating='" | last | split: "'" | first | plus: 0 %}
+        {%- assign r_review_count = product.metafields.judgeme.widget | split: "data-number-of-reviews='" | last | split: "'" | first | plus: 0 %}
+        {%- assign r_review_provider = "judgeme" -%}
+        {%- endif -%}
+
+        {% if r_review_provider != blank and r_review_value != blank and r_review_count != blank and r_review_count != "0" and r_review_count != 0 %},
+        "aggregateRating": {
+        "@type": "AggregateRating",
+        "description": "{{ r_review_provider }}",
+        "ratingValue": {{ r_review_value }},
+        "ratingCount": {{ r_review_count }}
+        },
+        "review":{
+           "@type":"Review",
+           "reviewRating":{
+              "@type":"Rating",
+              "ratingValue":"5",
+              "bestRating":"5"
+           },
+           "author":{
+              "@type":"Person",
+              "name": {{ shop.name | json }}
+           }
+        }
+        {% endif %}
+	  }
+
+    </script>
+  
+  	<script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": {{ shop.url | json }}
+          },
+          {%- if product.collections[0].title != blank -%}
+           {
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{product.collections[0].title | json}},
+            "item": {{ shop.url | append: product.collections[0].url | json }}
+          },
+          {%- endif -%}
+          {
+            "@type": "ListItem",
+            "position": {%- if product.collections[0].title != blank -%} 3 {%- else -%} 2 {%- endif -%},
+            "name": {{product.title | json}},
+            "item": {{ shop.url | append: product.url | json }}
+          }
+
+        ]
+      }
+    </script>
+    
+{% endif %}

@@ -1,0 +1,68 @@
+<script type="text/javascript">
+  {% if cart %}
+    window.pn.cart = {};
+  	window.pn.cart = {{cart | json}}
+    window.pn.cart.items = [];
+
+    {% for item in cart.items %}
+      var cart_item = {{item | json}};
+      cart_item["collection_ids"] = [];
+      {% for c in item.product.collections %}
+        cart_item["collection_ids"].push({{c.id}})
+        {% endfor %}
+      window.pn.cart.items.push(cart_item);
+    {% endfor %}
+
+    if (typeof window.pn.cart.items == "object") {
+      for (var i=0; i<window.pn.cart.items.length; i++) {
+        ["sku", "vendor", "url", "image", "handle", "product_type", "product_description"].map(function(a) {
+          delete window.pn.cart.items[i][a]
+        })
+      }
+    }
+  {% endif %}
+</script>
+
+{% raw %}
+<script>
+if(typeof pn === "undefined"){
+  pn = {};
+}
+if(typeof pn.settings === "undefined"){
+  pn.settings = {};
+}
+pn.settings.defaultSetting={"id":27596232,"a":"ADD TO CART NOW","b":true,"c":null,"d":"Out of stock","e":false,"f":"Only {{qty}} remaining","g":"2-4 ADDITIONAL BUSINESS DAYS TO SHIP","h":"below","i":false,"j":null,"k":null,"l":null,"m":"default","n":null,"o":true,"handle":null,"p":null,"y":null,"q":true,"r":true,"s":null,"t":null,"u":2,"v":false,"w":"ribbon","tag":null,"x":null,"z":"no_discount","aa":"0.0","ab":0,"price":"0.0","compare_at_price":"0.0","partial_payment_z":"no_partial_discount","partial_payment_aa":"0.0","partial_payment_ab":0,"selling_plan_group_id":null,"selling_plan_group_name":null,"partial_payment_charge_date":null};
+pn.settings.singleProductSettings=[];
+pn.settings.tagSettings=[{"id":41130328,"a":"ADD TO CART NOW","b":true,"c":null,"d":"Out of stock","e":false,"f":"Only {{qty}} remaining","g":"SHIPS OUT JANUARY 1st","h":"below","i":false,"j":null,"k":null,"l":null,"m":"tag-parent","n":null,"o":false,"handle":null,"p":null,"y":null,"q":true,"r":true,"s":null,"t":null,"u":2,"v":false,"w":"ribbon","tag":"1223","x":"","z":"no_discount","aa":"0.0","ab":0,"price":"0.0","compare_at_price":"0.0","partial_payment_z":"no_partial_discount","partial_payment_aa":"0.0","partial_payment_ab":0,"selling_plan_group_id":null,"selling_plan_group_name":null,"partial_payment_charge_date":null},{"id":39161984,"a":"BUY NOW","b":true,"c":null,"d":"Out of stock","e":false,"f":"Only {{qty}} remaining","g":"2-4 ADDITIONAL BUSINESS DAYS TO SHIP","h":"below","i":false,"j":null,"k":null,"l":null,"m":"tag-parent","n":"43725487964403","o":false,"handle":"10-packs-outre-crochet-passion-boho-water-curl-20","p":"8004817158387","y":"https://cdn.shopify.com/s/files/1/0614/9387/0835/products/bpass.jpg?v=1681147738","q":true,"r":true,"s":-3,"t":null,"u":2,"v":true,"w":"ribbon","tag":"prez","x":"","z":"no_discount","aa":"0.0","ab":0,"price":"0.0","compare_at_price":"0.0","partial_payment_z":"no_partial_discount","partial_payment_aa":"0.0","partial_payment_ab":0,"selling_plan_group_id":null,"selling_plan_group_name":null,"partial_payment_charge_date":null},{"id":39166315,"a":"BUY NOW","b":true,"c":null,"d":"Out of stock","e":false,"f":"Only {{qty}} remaining","g":"1-2 ADDITIONAL BUSINESS DAYS TO SHIP","h":"below","i":false,"j":null,"k":null,"l":null,"m":"tag-parent","n":"43708381561075","o":false,"handle":"illuze-hd-lace-front-wig-fishtail-braided-36","p":"7998367465715","y":"https://cdn.shopify.com/s/files/1/0614/9387/0835/products/ILLUZE-LACE-FISHTAIL-BRAIDED-36_2.jpg?v=1680542797","q":true,"r":true,"s":-1,"t":null,"u":2,"v":true,"w":"ribbon","tag":"senz","x":"","z":"no_discount","aa":"0.0","ab":0,"price":"0.0","compare_at_price":"0.0","partial_payment_z":"no_partial_discount","partial_payment_aa":"0.0","partial_payment_ab":0,"selling_plan_group_id":null,"selling_plan_group_name":null,"partial_payment_charge_date":null},{"id":39166265,"a":"BUY NOW","b":true,"c":null,"d":"Out of stock","e":false,"f":"Only {{qty}} remaining","g":"1-2 ADDITIONAL BUSINESS DAYS TO SHIP","h":"below","i":false,"j":null,"k":null,"l":null,"m":"tag-parent","n":"43857698455795","o":false,"handle":"100-virgin-brazilian-human-hair-bundles-3-pieces-natural-body-wave-h3p-bd","p":"8063997477107","y":"https://cdn.shopify.com/s/files/1/0614/9387/0835/files/3packbodybundle.png?v=1691429072","q":true,"r":true,"s":-1,"t":null,"u":2,"v":true,"w":"ribbon","tag":"oradell","x":"","z":"no_discount","aa":"0.0","ab":0,"price":"0.0","compare_at_price":"0.0","partial_payment_z":"no_partial_discount","partial_payment_aa":"0.0","partial_payment_ab":0,"selling_plan_group_id":null,"selling_plan_group_name":null,"partial_payment_charge_date":null}];
+</script>
+<style type="text/css">
+  .pn-original-subtotal{
+    text-decoration: line-through;
+    display:inline-block;
+  }
+  .pn-discounted-subtotal{
+    font-weight:bold;
+    margin-left:20px;
+    display:inline-block;
+    font-size: 1.3em;
+  }
+
+  .pn-line-item-original-price {
+    text-decoration: line-through;
+  }
+
+  .pn-line-item-discounted-price {
+    font-size: 1.2em;
+    margin-left: 8px;
+  }
+</style>
+{% endraw %}
+
+
+<div id="pn-mixed-cart-warning" class="pn-modal">
+  <div id="pn-mixed-cart-warning-content">
+    <span id="pn-modal-close-btn">x</span>
+    <p class="pn-mixed-cart-heading" id="pn-mixed-cart-warning-title"></p>
+    <div id="pn-mixed-cart-warning-text"></div>
+  </div>
+</div>

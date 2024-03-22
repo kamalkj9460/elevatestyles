@@ -1,0 +1,199 @@
+<div class="page-width">
+    <h2 class="section-header__title">{{ section.settings.heading }}</h2>
+  <div class="video_wrapp_outer">
+    {%- for block in section.blocks -%}
+    {%- if block.settings.enable_section -%}
+    <div class="video_wrapp">
+      {%- assign image = block.settings.image -%}
+      {%- assign imgurl = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      <div class="img_video_outer">
+        <div class="video_image" >
+          <a href="#" class="play_video" >
+            {%- if image != blank -%}
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+              <circle cx="30" cy="30" r="30" style="fill: rgba(223,87,69, 1)"/>
+              <path d="M47.0273 30L21.4868 44.7458L21.4868 15.2541L47.0273 30Z" fill="white"/>
+            </svg>
+            <figure class="image_outer" >
+              <img loading="lazy" class="single__image lazyload"
+                   data-src="{{ imgurl }}"
+                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                   data-aspectratio="{{ image.aspect_ratio }}"
+                   data-sizes="auto"
+                   alt="{{ image.alt | escape }}">
+              <noscript>
+                {{ image | img_url: '500x', scale: 2 | img_tag: image.alt, 'single__image' }}            
+              </noscript>
+            </figure>
+          </a>
+          {%- endif -%}
+          <div class="video_wc_box">
+            <a href="#"  class="video_close" id="video_close"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 40 40"><path d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z" class="layer"/></svg></a>
+            <!--------------------------------------------------- first ----------------------------------------------------->
+            {%- if block.settings.video_url contains 'youtube.com/watch' -%}
+            {%- assign video_id = block.settings.video_url | split: 'v=' -%}
+            {%- assign video_id = video_id[1] | split: '&' | first -%}
+
+
+            <iframe id="video_{{forloop.index}}" class="video" data-src="https://www.youtube.com/embed/{{video_id}}?mute=0&loop=1&playlist={{video_id}}" src="https://www.youtube.com/embed/{{video_id}}?mute=0&loop=1&playlist={{video_id}}" 
+                    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
+            {%- endif -%}
+
+            <!---------------------------------------------------- second ------------------------------------------------------->
+            {%- if block.settings.video_url contains 'youtu.be/' -%}
+            {%- assign video_id = block.settings.video_url | split: '.be/' -%}
+            {%- assign video_id = video_id[1] | split: '&' | first -%}
+            <iframe id="video_{{forloop.index}}" class="video" data-src="https://www.youtube.com/embed/{{video_id}}?mute=0&loop=1&playlist={{video_id}}" src="https://www.youtube.com/embed/{{video_id}}?mute=0&loop=1&playlist={{video_id}}" 
+                    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            {%- endif -%}
+
+            <!---------------------------------------------------------- third --------------------------------------------------------------->
+            {%- if block.settings.video_url contains 'vimeo.com' -%}
+            {%- assign video_id = block.settings.video_url | split: '.com/' -%}
+            {%- assign video_id = video_id[1] | split: '/' | first -%}
+
+            <iframe id="video_{{forloop.index}}" class="video" data-src="https://player.vimeo.com/video/{{ video_id }}?&loop=1&playlist={{ video_id }}" src="https://player.vimeo.com/video/{{ video_id }}?&loop=1&playlist={{ video_id }}" 
+                    frameborder="0" allow="accelerometer;encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+            {% endif %}
+
+
+            <!------------------------------------------------------------- forth ----------------------------------------------------------->
+            {%- if block.settings.video_url contains '.mp4' -%}
+            <video class="Mp4Video"
+                   id="Mp4Video"
+                   src="{{ block.settings.video_url }}"
+                   loop muted playsinline>
+              <source src="{{ block.settings.video_url }}" type="video/mp4">
+            </video>
+            {%- endif -%}
+
+
+            <!--------------------------------------------------- end -------------------------------------------------------------------------->
+          </div>
+        </div>
+      </div>
+    </div>
+    {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Video Slider",
+    "class": "optimiz_treatment",
+    "settings": [
+		{
+          "type":"richtext",
+          "id":"heading",
+          "label":"Heading"
+        }
+    ],
+    "blocks":[
+      {
+        "type":"video",
+        "name":"Video",
+        "settings":[
+          {
+            "type":"checkbox",
+            "id":"enable_section",
+            "label":"Enable Section",
+            "default":true
+          },
+          {
+            "type": "text",
+            "id": "video_url",
+            "label": "Background video link",
+            "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "info": "Supports YouTube, .MP4 and Vimeo. Not all features supported by Vimeo. [Learn more](https://archetypethemes.co/blogs/impulse/how-do-i-add-background-videos)"
+          },
+          {
+            "type":"image_picker",    
+            "id":"image",
+            "label":"Image"
+          }
+        ]
+      }
+    ],
+    "presets": [{
+        "name": "Video Blocks"
+      }
+    ]
+  }
+{% endschema %}
+
+<script>
+  $(document).ready(function(){ 
+  if($('.Mp4Video').length > 0) {
+    $('.video_image .play_video').on('click', function(ev) {
+      ev.preventDefault(); 
+      $(this).parents('.video_image').find('.video_wc_box video').css({'visibility':'visible','opacity':1});
+      $(this).parents('.video_image').find('.video_wc_box .video_close').css({'visibility':'visible','opacity':1});
+      $(this).css({'visibility':'hidden','opacity':0});    
+      $('.Mp4Video').get(0).play();
+    });
+  }else{
+    $('.video_image .play_video').on('click', function(ev) {
+      $(this).css({'visibility':'hidden','opacity':0});
+      $(this).parents('.video_image').find('.video_wc_box iframe').css({'visibility':'visible','opacity':1});
+      $(this).parents('.video_image').find('.video_wc_box .video_close').css({'visibility':'visible','opacity':1});
+      $(this).parents('.video_image').find(".video")[0].src += "&autoplay=1";
+      ev.preventDefault();  
+    });
+  }  
+  if($('.Mp4Video').length > 0) {
+    $('.video_image .video_close').on('click', function(ev) {
+      ev.preventDefault(); 
+      $(this).css({'visibility':'hidden','opacity':0});
+      $(this).parents('.video_image').find('video').css({'visibility':'hidden','opacity':0});
+      $(this).parents('.video_image').find('.play_video').css({'visibility':'visible','opacity':1});
+      $('.Mp4Video').get(0).pause();
+      $('.Mp4Video').get(0).currentTime = 0;
+    });
+  }else{
+    $('.video_image .video_close').on('click', function(ev) {
+      ev.preventDefault();
+      $(this).css({'visibility':'hidden','opacity':0});
+      $(this).parents('.video_image').find('iframe').css({'visibility':'hidden','opacity':0});
+      $(this).parents('.video_image').find('.play_video').css({'visibility':'visible','opacity':1});   
+      var playurl = $(this).parents('.video_image').find('.video').attr('data-src');
+      $(this).parents('.video_image').find('.video').attr('src', playurl);
+    });
+  }
+
+    $('.video_wrapp_outer').slick({
+      infinite: true,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      arrows: true,
+      dots: false,
+      responsive: [
+        {
+          breakpoint: 1280,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 991,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 640,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    });
+  });
+</script>

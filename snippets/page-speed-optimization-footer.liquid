@@ -1,0 +1,15 @@
+{% if template contains 'product' %}
+<script type="text/javascript">
+// Google Page Speed Optimization
+  document.querySelectorAll('.product-block-list__item--description iframe').forEach(iframeElement => {
+    iframeElement.setAttribute("data-src", iframeElement.src);
+    iframeElement.removeAttribute("src");
+    iframeElement.classList.add("lazyload");
+  });
+  document.querySelectorAll('.product-block-list__item--content .card__section .rte img').forEach(imgElement => {
+    imgElement.setAttribute("height", imgElement.height);
+	imgElement.setAttribute("width", imgElement.width);
+  });
+// End Google Page Speed Optimization
+</script>
+{% endif %}
